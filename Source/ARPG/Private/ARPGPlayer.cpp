@@ -22,7 +22,7 @@ AARPGPlayer::AARPGPlayer()
 	SpringArm->SetupAttachment(this->GetRootComponent());
 	Camera->SetupAttachment(SpringArm);
 
-	SpringArm->TargetArmLength = 800.f;
+	SpringArm->TargetArmLength = 1200.f;
 	SpringArm->SetWorldRotation(FRotator(-60.f, 0.f, 0.f));
 
 	// Mesh Settings
@@ -66,7 +66,7 @@ void AARPGPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 void AARPGPlayer::MoveForward(float Value)
 {
 	if (Value != 0.f) {
-		const FVector Forward = UKismetMathLibrary::Vector_Forward() * MoveSpeed * Value;
+		const FVector Forward = Camera->GetForwardVector() * MoveSpeed * Value;
 		//UE_LOG(LogTemp, Warning, TEXT("Move Value: %s %f"), *Forward.ToString());
 		AddMovementInput(Forward);
 	}
@@ -75,7 +75,7 @@ void AARPGPlayer::MoveForward(float Value)
 void AARPGPlayer::MoveRight(float Value)
 {
 	if (Value != 0.f) {
-		const FVector Right = UKismetMathLibrary::Vector_Right() * MoveSpeed * Value;
+		const FVector Right = Camera->GetRightVector() * MoveSpeed * Value;
 		//UE_LOG(LogTemp, Warning, TEXT("Move Value: %s %f"), *Right.ToString());
 		AddMovementInput(Right);
 	}
